@@ -1,0 +1,44 @@
+include-files: 
+##########
+# The plugin will scan through and load these files after loading the main config below.
+# Note: drops from included files will are inclusive and will all be added to the drop list.
+##########
+#  - includes/om-undead_chaos.yml       # doesn't exist yet - perhaps lots of zombies/skeletons        
+
+## Other users overhauls
+#  - includes/overhaul-zarius.yml       # Zar's config (does not exist yet)
+    
+## Add your files here (alternatively just add your custom drops to the bottom of this file)
+#  - my_custom_file1.yml
+
+
+aliases:
+##########	
+# add custom YAML aliases here (advanced customisation) - see the wiki for more information
+
+defaults:
+##########	
+# add default values for the config below, "include-files" have their own "defaults" sections
+
+
+othermobs:
+##########	
+# Your changes here, or create a new .yml file and include it above in the "include-files" section
+# Explore the included config files for many more examples
+#
+# If you make a interesting or crazy config let me know on the forum and I might include it in the next release.
+#
+# Example:
+  DesertBlaze:
+    - biomes: [DESERT]
+      replacemob: ALL/100%
+      world: [WORLD]
+      height: ">74"
+      weather: CLEAR
+      
+  TwinBlaze:
+    - biomes: [DESERT]
+      replacemob: ALL/2/5%
+      world: [WORLD]
+      height: ">74"
+      weather: CLEAR

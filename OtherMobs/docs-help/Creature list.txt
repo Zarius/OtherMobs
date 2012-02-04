@@ -1,0 +1,24 @@
+
+Creatures
+    * CHICKEN
+    * COW
+    * CREEPER
+      * (note: can use @UNPOWERED, @POWERED)
+
+    * GHAST
+    * GIANT
+    * MONSTER
+    * PIG
+      * (note: can use @UNSADDLED, @SADDLED)
+
+    * PIG_ZOMBIE
+    * SHEEP
+    * SKELETON
+    * SLIME
+      * (note: can use @TINY/SMALL/BIG/HUGE/[or use a number from 1 to 32]) 
+    * SPIDER
+    * SQUID
+    * WOLF
+      * (note: can use @TAME, @NEUTRAL, @ANGRY)
+
+    * ZOMBIE

@@ -1,0 +1,30 @@
+name: OtherMobs
+main: com.gmail.zariust.othermobs.OtherMobs
+version: 0.0.2-pre-release
+authors:
+  - Zarius
+commands:
+    om:
+        description: Administrate the OtherMobs plugin
+        aliases: [omreload, omr, omshow, oms, omprofile, omp]
+        usage: |
+            /om show <block>
+            /om profile on
+            /om profile off
+            /om profile <event> [avg]
+            /om reload - reload config
+softdepend:
+  - BigBrother
+  - WorldGuard
+  - LogBlock
+permissions:
+    othermobs.admin.reloadconfig:
+        default: op
+        description: Gives permission to reload the config files for OtherMobs.
+    othermobs.admin.show:
+        default: op
+        description: Gives permission to show the registered configs.
+    othermobs.admin.profiling:
+        default: op
+        description: Gives permission to use profiling commands.
+        

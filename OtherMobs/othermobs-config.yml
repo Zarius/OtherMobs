@@ -1,0 +1,9 @@
+# Set this to "low" to reduce number of boot messages or to high, highest, extreme for more debugging info
+verbosity: normal
+
+# Try adjusting this if you have compatibility problems with other plugins.
+# Default: "high". Can also use "low", "normal", "high", "highest".
+priority: high
+
+# Disable all mobs - only configured mobs will appear - not yet implemented
+disableallmobs: false

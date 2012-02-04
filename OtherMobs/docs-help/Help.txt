@@ -1,0 +1,5 @@
+ OtherMobs lets you modify mob spawn ratios and types as well as create new custom mobs.
+ 
+ It is very flexible, but out of the box does nothing.  It's all about giving you the power to configure your server they way you want.
+
+ Work in progress...

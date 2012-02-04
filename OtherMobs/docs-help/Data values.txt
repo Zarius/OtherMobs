@@ -1,0 +1,20 @@
+Data Values
+
+
+There are two places you can specify an additional data value:
+
+    In the replacemob or the creaturetype:
+
+    othermobs:
+        Spider:
+            - creaturetype: CREEPER@POWERED
+              replacemob: PIG@SADDLED
+
+    
+CREATURES
+
+    PIG@SADDLED, PIG@UNSADDLED
+    WOLF@NEUTRAL, WOLF@TAMED, WOLF@ANGRY
+    CREEPER@UNPOWERED, CREEPER@POWERED
+
+
