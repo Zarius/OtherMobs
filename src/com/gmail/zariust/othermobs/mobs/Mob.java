@@ -16,6 +16,7 @@
 
 package com.gmail.zariust.othermobs.mobs;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ import org.bukkit.entity.Creature;
 import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
 import com.gmail.zariust.othermobs.ConfigLoader;
 import com.gmail.zariust.othermobs.Log;
@@ -40,6 +42,7 @@ public class Mob {
 	private Map <Ability, Double> abilities; // map of abilities and chance of success
 	private List <String> attacks;
 	private Comparative attackRange;
+	private Map <String, Float> immunities;
 	
 	public Mob (MobConfig config) {
 		this.config = config;
@@ -85,5 +88,45 @@ public class Mob {
 		
 		
 	}
+
+	/** Adds an immunity to the mob.  Parse a string with possible datavalues, eg.
+	 * immunity: burn@90% # gives 90% immunity to fire & lava.
+	 * 
+	 * TODO: add safety check for "level" to bound between 0 and 100%
+	 * hmm.. or perhaps allow higher levels for healing? ie. 110% gets some health from lava?
+	 * negative amounts are more susceptible to damage? ie. -50% gets more lava damage than normal
+	 * 
+	 * @param string
+	 */
+	public void addImmunity(String string) {
+		String[] split = string.split("@");
+		String level = "100";
+		if (split.length > 0)
+			level = split[1].replaceAll("%", "");
+		
+		if (this.immunities == null)
+			this.immunities = new HashMap<String, Float>();
+		
+		if (string.equalsIgnoreCase("burn")) {
+			this.immunities.put("lava", Float.valueOf(level));
+			this.immunities.put("fire", Float.valueOf(level));
+			this.immunities.put("fire_tick", Float.valueOf(level));
+		} else {
+			this.immunities.put(string, Float.valueOf(level));
+		}
+	}
+
+	public Map<String, Float> getImmunities() {
+		return this.immunities;
+	}
 	
+	public float hasImmunity(String string) {
+		string = string.replaceAll("[ _-]", "");
+		boolean match = false;
+		float level = 0;
+		for (String immunity : immunities.keySet()) {
+			if (immunity.replaceAll("[ _-]", "").equalsIgnoreCase(string)) level = immunities.get(immunity);
+		}
+		return level;
+	}
 }

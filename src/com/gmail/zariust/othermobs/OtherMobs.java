@@ -100,6 +100,7 @@ public class OtherMobs extends JavaPlugin
 		// Register events
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvent(Event.Type.CREATURE_SPAWN, entityListener, ConfigLoader.getPriority(), this);
+		pm.registerEvent(Event.Type.ENTITY_DAMAGE, entityListener, ConfigLoader.getPriority(), this);
 		
 		// Register command listener
 		this.getCommand("om").setExecutor(new OtherMobsCommand(this));

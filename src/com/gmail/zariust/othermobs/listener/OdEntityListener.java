@@ -31,6 +31,7 @@ import org.getspout.spoutapi.player.EntitySkinType;
 import com.gmail.zariust.othermobs.ConfigLoader;
 import com.gmail.zariust.othermobs.Log;
 import com.gmail.zariust.othermobs.OtherMobs;
+import com.gmail.zariust.othermobs.OtherMobsAPI;
 import com.gmail.zariust.othermobs.common.Verbosity;
 import com.gmail.zariust.othermobs.mobs.Mob;
 import com.gmail.zariust.othermobs.mobs.MobConfig;
@@ -47,7 +48,18 @@ public class OdEntityListener extends EntityListener
 		
 	@Override
 	public void onEntityDamage(EntityDamageEvent event) {
-	
+		Mob mob = OtherMobsAPI.getMob(event.getEntity().getUniqueId());
+		
+		// This doesn't work well yet as damage is in integers :(
+		// Maybe we'll have to write our own damage value as a double internally and round to integer for Bukkit
+		if (mob != null) {
+			Float level = mob.hasImmunity(event.getCause().toString());
+			Integer damage = event.getDamage();
+			Float damageDouble = Float.parseFloat(damage.toString());
+			damageDouble = damageDouble - (damageDouble * level/100);
+			event.setDamage(Math.round(damageDouble));
+			Log.extreme("Damage is: "+event.getDamage());
+		}
 	}
 
 	@Override

@@ -123,6 +123,7 @@ public class OtherMobsCommand implements CommandExecutor {
 				Mob newMob = OtherMobsAPI.spawnMob(mobConfig, player.getTargetBlock(null, 100).getLocation());
 				newMob.getEntity().setFireTicks(20000);  // on fire
 				newMob.getEntity().setNoDamageTicks(400); // immune for 20 seconds
+				newMob.addImmunity("BURN");
 
 			}
 			break;
