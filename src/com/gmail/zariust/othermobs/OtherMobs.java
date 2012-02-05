@@ -86,13 +86,15 @@ public class OtherMobs extends JavaPlugin
 		// Store name & version statically for log functions
 		pluginName = this.getDescription().getName();
 		pluginVersion = this.getDescription().getVersion();
-			
+
+		// Intialise config
+		config = new ConfigLoader(this);
+
 		// Setup any plugins needed before loading the config
 		setupWorldGuard();
 		setupMobArena();
 
 		// Load up the main config files
-		config = new ConfigLoader(this);
 		config.load();
 		
 		// Register events
