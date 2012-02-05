@@ -139,6 +139,7 @@ public class OtherMobsAPI {
 		Mob mob = new Mob(mobConfig);
 		LivingEntity livingEntity = location.getWorld().spawnCreature(location, mobConfig.getCreatureType());
 		mob.setEntity(livingEntity);
+		ConfigLoader.getMobs().put(livingEntity.getUniqueId(), mob);
 		return (mob);
 	}
 	
