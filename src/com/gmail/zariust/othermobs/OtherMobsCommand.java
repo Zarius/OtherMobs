@@ -121,8 +121,8 @@ public class OtherMobsCommand implements CommandExecutor {
 				mobConfig.setCreatureType(creatureType);
 				mobConfig.setHealthRange(new IntRange(1,8));
 				Mob newMob = OtherMobsAPI.spawnMob(mobConfig, player.getTargetBlock(null, 100).getLocation());
-				newMob.getEntity().setFireTicks(20000);  // on fire
-				newMob.getEntity().setNoDamageTicks(400); // immune for 20 seconds
+				Flaming flaming = new Flaming();
+				newMob.addAbility(flaming);								
 				newMob.addImmunity("BURN");
 
 			}

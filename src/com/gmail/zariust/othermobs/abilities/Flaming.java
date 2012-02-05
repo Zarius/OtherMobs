@@ -16,6 +16,15 @@
 
 package com.gmail.zariust.othermobs.abilities;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Effect;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+
+import com.gmail.zariust.othermobs.Log;
+
+
 public class Flaming extends Ability {
 
 	@Override
@@ -53,17 +62,36 @@ public class Flaming extends Ability {
 		
 	}
 
+	private int count = 0;
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		
+		if (mob.getEntity().isDead()) {
+			Bukkit.getServer().getScheduler().cancelTask(taskId);
+			Log.high("Entity ("+mob.getEntity().toString()+") dead - task "+taskId+" cancelled.");	
+			return;
+		}
+
+		mob.getEntity().getLocation().getWorld().playEffect(mob.getEntity().getLocation(), Effect.MOBSPAWNER_FLAMES, 0, 16);
+
+		// Idea here is for a random chance of setting a block it's on (or near it) to burst into flames.
+		// If the mob is immune to fire then it'll live, if not - well, it'll not live...
+		count++;
+		Block block = mob.getEntity().getLocation().getBlock();
+		Log.normal(block.getType().toString()+ "count"+count);
+		if (count > 40) {
+			count = 0;
+			if (block.getType() == Material.AIR) {
+				block.setType(Material.FIRE);
+			}
+		}
 	}
 
 	@Override
 	void initLocal() {
 		// TODO Auto-generated method stub
-		this.mob.getEntity().setFireTicks(20000);  // on fire
-		this.mob.getEntity().setNoDamageTicks(400); // immune for 20 seconds
+		//this.mob.getEntity().setFireTicks(20000);  // on fire
+		//this.mob.getEntity().setNoDamageTicks(400); // immune for 20 seconds
+		scheduleTicks = 5;
 	}
 
 }
