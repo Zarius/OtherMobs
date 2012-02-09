@@ -101,7 +101,7 @@ public class Mob {
 	public void addImmunity(String string) {
 		String[] split = string.split("@");
 		String level = "100";
-		if (split.length > 0)
+		if (split.length > 1)
 			level = split[1].replaceAll("%", "");
 		
 		if (this.immunities == null)
@@ -121,8 +121,9 @@ public class Mob {
 	}
 	
 	public float hasImmunity(String string) {
+		if (immunities == null) return 0f;
+		
 		string = string.replaceAll("[ _-]", "");
-		boolean match = false;
 		float level = 0;
 		for (String immunity : immunities.keySet()) {
 			if (immunity.replaceAll("[ _-]", "").equalsIgnoreCase(string)) level = immunities.get(immunity);
