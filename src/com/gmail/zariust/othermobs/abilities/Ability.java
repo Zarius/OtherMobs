@@ -27,9 +27,11 @@ public abstract class Ability implements Runnable {
 	protected Mob mob;
 	protected int taskId;
 	protected int scheduleTicks;
+	protected int scheduleDelay;
 	
 	Ability () {
 		scheduleTicks = 40;
+		scheduleDelay = 1;
 	}
 	
 	// FIXME: trying to init with the class of the object (eg. Glow) rather than this class
@@ -49,7 +51,7 @@ public abstract class Ability implements Runnable {
 		// TODO Auto-generated method stub
 		this.mob = mob2;
 		initLocal();
-		taskId = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(OtherMobs.plugin, this, scheduleTicks, scheduleTicks);
+		taskId = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(OtherMobs.plugin, this, scheduleTicks, scheduleDelay);
 	}
 
 }

@@ -28,6 +28,7 @@ import org.getspout.spoutapi.player.EntitySkinType;
 
 import com.gmail.zariust.othermobs.abilities.Faction;
 import com.gmail.zariust.othermobs.abilities.Flaming;
+import com.gmail.zariust.othermobs.abilities.Flight;
 import com.gmail.zariust.othermobs.abilities.Glow;
 import com.gmail.zariust.othermobs.common.CommonEntity;
 import com.gmail.zariust.othermobs.data.Data;
@@ -187,6 +188,9 @@ public class OtherMobsCommand implements CommandExecutor {
 								} else if (arg.substring(2).equalsIgnoreCase("glow")) {
 									Glow glow = new Glow();
 									newMob.addAbility(glow);
+								} else if (arg.substring(2).equalsIgnoreCase("flight")) {
+									Flight flight = new Flight();
+									newMob.addAbility(flight);
 								}
 							} else if (arg.substring(0,2).equalsIgnoreCase("s:") && ConfigLoader.isSpoutEnabled()) {
 								if (arg.substring(2).equalsIgnoreCase("ezshirt")) {
