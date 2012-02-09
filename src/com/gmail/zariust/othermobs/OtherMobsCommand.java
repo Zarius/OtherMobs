@@ -16,10 +16,14 @@
 
 package com.gmail.zariust.othermobs;
 
+import net.minecraft.server.MobEffect;
+
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -45,7 +49,9 @@ public class OtherMobsCommand implements CommandExecutor {
 		//SHOW("show", "s"),
 		PROFILE("profile", "p"),
 		SPAWN("spawn", "s"),
-		SPAWNTEST("spawnfire", "w");
+		SPAWNTEST("spawnfire", "w"),
+		GLOWTEST("glowtest", "w"),
+		POTIONEFFECTTEST("potioneffect", "pe");
 		private String cmdName;
 		private String cmdShort;
 
@@ -108,6 +114,48 @@ public class OtherMobsCommand implements CommandExecutor {
 				sender.sendMessage("OtherMobs config reloaded.");
 				Log.normal("Config reloaded by " + getName(sender) + ".");
 			} else sender.sendMessage("You don't have permission to reload the config.");
+			break;
+		case GLOWTEST:
+			if (sender instanceof Player) {
+				Log.highest("setting glow");
+				if (args.length > 0) {
+					Log.highest("setting glow in."+ args.toString());
+					Location glowLoc = ((Player)sender).getTargetBlock(null, 100).getLocation();
+					try {
+						Glow.setBlockLightLevel(glowLoc, Integer.parseInt(args[0]));
+					} catch (NumberFormatException ex) {
+						// do nothing
+					}
+				}
+			}
+			break;
+		case POTIONEFFECTTEST:
+			if (sender instanceof Player) {
+				Player player = (Player)sender;
+				int potionEffectId = 1, time = 80, modifier = 20;
+				if (args.length > 0) {
+					try {
+						potionEffectId = Integer.parseInt(args[0]);
+					} catch (NumberFormatException ex) {
+						// do nothing
+					}
+					
+					for (String arg : args) {
+						if (arg.startsWith("m:")) {
+							try {
+								modifier = Integer.parseInt(arg.substring(2));
+							} catch (NumberFormatException ex) {} // do nothing
+						}
+						if (arg.startsWith("t:")) {
+							try {
+								time = Integer.parseInt(arg.substring(2));
+							} catch (NumberFormatException ex) {} // do nothing
+						}
+					}
+				}
+				((CraftPlayer)player).getHandle().addEffect(new MobEffect(potionEffectId, time, modifier));
+				player.sendMessage("Adding effect: "+potionEffectId+", duration: "+time+", modifier:"+modifier);
+			}
 			break;
 		case SPAWNTEST:
 			if (sender instanceof Player) {
